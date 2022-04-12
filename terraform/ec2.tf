@@ -4,7 +4,10 @@
 resource "aws_instance" "jenkins-server" {
   ami           = var.ami
   instance_type = "t2.micro"
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "8"
+  }
   key_name      = var.key_pair_name
-  volume_size   = "8"
   ebs_optimized = false
 }
