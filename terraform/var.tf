@@ -1,5 +1,5 @@
 variable "name" {
-  default = "mst"
+  default = "tdb"
 }
 variable "region" {
   default = "us-west-2"
@@ -9,8 +9,12 @@ variable "team" {
   default = "admin"
 }
 
+variable "site" {
+  default = "tdb"
+}
+
 variable "cidr_block" {
-  default = ""
+  default = "10.20.0.0/16"
 }
 variable "ami" {
   default = "ami-012c545587af64585"
