@@ -1,9 +1,10 @@
 resource "aws_subnet" "public" {
   for_each                = toset(var.availability-zones)
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = cidrsubnet(var.cidr_block, 8, (20 + index(var.availability-zones, each.value)))
+  cidr_block              = cidrsubnet(var.cidr_block, 8, (2 + index(var.availability-zones, each.value)))
   availability_zone_id    = each.value
-  map_public_ip_on_launch = false
+  map_public_ip_on_launch = true
+  depends_on              = [aws_internet_gateway.public]
   tags = {
     Name      = "${var.name}-public-${each.value}"
     SITE      = var.site

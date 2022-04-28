@@ -1,5 +1,5 @@
 resource "aws_vpc" "main" {
-  cidr_block           = "10.20.0.0/16"
+  cidr_block           = var.cidr_block
   instance_tenancy     = "default"
   enable_dns_support   = true
   enable_dns_hostnames = true
@@ -20,10 +20,11 @@ resource "aws_default_route_table" "main" {
   }
 }
 
-resource "aws_route" "default" {
-  route_table_id         = aws_default_route_table.main.id
-  destination_cidr_block = "0.0.0.0/0"
-}
+#resource "aws_route" "default" {
+#  route_table_id         = aws_default_route_table.main.id
+#  destination_cidr_block = "0.0.0.0/0"
+#  #nat_gateway_id         = aws_nat_gateway.default.id
+#}
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
@@ -37,5 +38,5 @@ resource "aws_route_table" "public" {
 resource "aws_route" "public-igw" {
   route_table_id         = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.default.id
+  gateway_id             = aws_internet_gateway.public.id
 }
