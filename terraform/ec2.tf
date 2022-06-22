@@ -1,4 +1,4 @@
-#This script helps you launch your ec2 instances 
+#This script helps you launch your ec2 instances in AWS 
 #you can use a simple module or resources
 
 resource "aws_instance" "jenkins-server" {
